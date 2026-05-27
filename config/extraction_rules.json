@@ -1,18 +1,4 @@
 ﻿{
-  "rules": [
-    {
-      "name": "Insurance Document",
-      "title_pattern": "(?:Insurance|Policy|Contract)\\s+([^\\n]{1,100})",
-      "year_pattern": "\\b(20\\d{2})\\b",
-      "priority": 1
-    },
-    {
-      "name": "Generic Title and Year",
-      "title_pattern": "^([A-Z][A-Za-z\\s]{5,100}?)(?:19|20)\\d{2}",
-      "year_pattern": "\\b(19|20)\\d{2}\\b",
-      "priority": 2
-    }
-  ],
   "output_format": "{title}_{year}.pdf",
   "backup_format": "{original_name}_{timestamp}.pdf",
   "max_title_length": 100,
