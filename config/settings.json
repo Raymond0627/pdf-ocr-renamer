@@ -1,0 +1,16 @@
+﻿{
+  "tesseract_path": "/usr/bin/tesseract",
+  "poppler_path": "/usr/bin/pdftoppm",
+  "ocr_dpi": 300,
+  "language": "eng",
+  "preprocessing": {
+    "convert_to_grayscale": true,
+    "apply_autocontrast": true,
+    "apply_binarization": true,
+    "threshold": 140
+  },
+  "backup_renamed_files": true,
+  "backup_folder": "backups",
+  "max_workers": 4,
+  "log_level": "INFO"
+}
