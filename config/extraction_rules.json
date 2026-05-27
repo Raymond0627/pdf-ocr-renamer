@@ -1,7 +1,12 @@
 ﻿{
   "output_format": "{title}_{year}.pdf",
   "backup_format": "{original_name}_{timestamp}.pdf",
-  "max_title_length": 100,
-  "invalid_char_replacement": "_",
-  "extract_first_page_only": false
+  "rules": [
+    {
+      "name": "Standard Format",
+      "priority": 1,
+      "title_pattern": "^(.+?)\\s*(?:\\(|\\[)?(?:19|20)\\d{2}",
+      "year_pattern": "(?:19|20)\\d{2}"
+    }
+  ]
 }

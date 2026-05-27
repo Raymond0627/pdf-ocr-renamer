@@ -26,7 +26,7 @@ def validate_pdf_files(folder_path):
     
     pdf_files = []
     for file in os.listdir(folder_path):
-        if file.lower().endswith(''.pdf''):
+        if file.lower().endswith('.pdf'):
             pdf_files.append(os.path.join(folder_path, file))
     
     return pdf_files
@@ -35,7 +35,7 @@ def validate_pdf_files(folder_path):
 def validate_filename(filename):
     if not filename:
         return False, "Filename is empty"
-    invalid_chars = r''[<>:"/\\|?*]''
+    invalid_chars = r'[<>:"/\\|?*]'
     if re.search(invalid_chars, filename):
         return False, f"Filename contains invalid characters: {filename}"
     if len(filename) > 255:
@@ -44,9 +44,9 @@ def validate_filename(filename):
 
 
 def sanitize_filename(filename, replacement="_"):
-    invalid_chars = r''[<>:"/\\|?*]''
+    invalid_chars = r'[<>:"/\\|?*]'
     sanitized = re.sub(invalid_chars, replacement, filename)
-    sanitized = sanitized.rstrip('''. '')
+    sanitized = sanitized.rstrip('. ')
     if len(sanitized) > 255:
         sanitized = sanitized[:251] + "..."
     return sanitized

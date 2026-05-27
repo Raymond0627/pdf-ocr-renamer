@@ -8,13 +8,13 @@ from tkinter import ttk
 import os
 import threading
 
-from ..utils.config import Config
-from ..utils.logger import setup_logger
-from ..utils.validators import validate_pdf_files
-from ..ocr.pdf_processor import PDFProcessor
-from ..ocr.text_extractor import TextExtractor
-from ..extraction.rule_engine import ExtractionEngine
-from ..renaming.file_renamer import FileRenamer
+from utils.config import Config
+from utils.logger import setup_logger
+from utils.validators import validate_pdf_files
+from ocr.pdf_processor import PDFProcessor
+from ocr.text_extractor import TextExtractor
+from extraction.rule_engine import ExtractionEngine
+from renaming.file_renamer import FileRenamer
 
 
 logger = setup_logger(__name__)
@@ -55,11 +55,14 @@ class PDFRenamerApp:
         try:
             self.processor = PDFProcessor(
                 dpi=self.config.get_setting("ocr_dpi", 300),
-                poppler_path=None
+                poppler_path=self.config.get_setting("poppler_path")
             )
             
+            tesseract_path = self.config.get_setting("tesseract_path")
+            logger.info(f"Using tesseract_path: {tesseract_path}")
+            
             self.extractor = TextExtractor(
-                tesseract_path=self.config.get_setting("tesseract_path"),
+                tesseract_path=tesseract_path,
                 language=self.config.get_setting("language", "eng")
             )
             
@@ -239,7 +242,7 @@ class PDFRenamerApp:
                         failed += 1
                         continue
                     
-                    self.log(f"  - Extracted: Title=''{title}'', Year=''{year}''")
+                    self.log(f"  - Extracted: Title='{title}', Year='{year}'")
                     new_filename = self.renamer.format_filename(
                         self.config.get_output_format(),
                         title=title,

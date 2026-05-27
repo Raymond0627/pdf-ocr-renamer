@@ -5,7 +5,7 @@ PDF processing - Convert PDF pages to images for OCR.
 from pdf2image import convert_from_path
 from PIL import Image, ImageOps, ImageFilter
 import os
-from ..utils.logger import setup_logger
+from utils.logger import setup_logger
 
 
 logger = setup_logger(__name__)
@@ -39,11 +39,11 @@ class PDFProcessor:
                          binarize=True, threshold=140):
         try:
             if grayscale:
-                image = image.convert(''L'')
+                image = image.convert('L')
             if autocontrast:
                 image = ImageOps.autocontrast(image)
             if binarize:
-                image = image.point(lambda x: 0 if x < threshold else 255, ''1'')
+                image = image.point(lambda x: 0 if x < threshold else 255, '1')
             logger.debug("Image preprocessing completed")
             return image
         except Exception as e:

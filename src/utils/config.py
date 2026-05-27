@@ -21,7 +21,7 @@ class Config:
             if not os.path.exists(file_path):
                 raise FileNotFoundError(f"Configuration file not found: {file_path}")
             
-            with open(file_path, ''r'') as f:
+            with open(file_path, 'r', encoding='utf-8-sig') as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON in {file_path}: {e}")

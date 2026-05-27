@@ -17,15 +17,15 @@ def setup_logger(name=__name__, log_level="INFO"):
     console_handler = logging.StreamHandler()
     console_handler.setLevel(getattr(logging, log_level.upper()))
     console_formatter = logging.Formatter(
-        ''%(asctime)s - %(name)s - %(levelname)s - %(message)s''
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     console_handler.setFormatter(console_formatter)
     
-    log_filename = f"logs/app_{datetime.now().strftime(''%Y%m%d_%H%M%S'')}.log"
+    log_filename = f"logs/app_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
     file_handler = logging.FileHandler(log_filename)
     file_handler.setLevel(getattr(logging, log_level.upper()))
     file_formatter = logging.Formatter(
-        ''%(asctime)s - %(name)s - %(levelname)s - %(message)s''
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     file_handler.setFormatter(file_formatter)
     

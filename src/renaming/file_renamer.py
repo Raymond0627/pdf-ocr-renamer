@@ -5,8 +5,8 @@ File renaming logic with backup support.
 import os
 import shutil
 from datetime import datetime
-from ..utils.logger import setup_logger
-from ..utils.validators import sanitize_filename
+from utils.logger import setup_logger
+from utils.validators import sanitize_filename
 
 
 logger = setup_logger(__name__)
@@ -49,7 +49,7 @@ class FileRenamer:
         try:
             os.makedirs(self.backup_folder, exist_ok=True)
             filename = os.path.basename(file_path)
-            timestamp = datetime.now().strftime(''%Y%m%d_%H%M%S'')
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             backup_name = f"{os.path.splitext(filename)[0]}_{timestamp}.pdf"
             backup_path = os.path.join(self.backup_folder, backup_name)
             shutil.copy2(file_path, backup_path)
@@ -61,7 +61,7 @@ class FileRenamer:
     
     def format_filename(self, template, title=None, year=None, original_name=None):
         try:
-            timestamp = datetime.now().strftime(''%Y%m%d_%H%M%S'')
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             title = sanitize_filename(title) if title else "unknown"
             year = sanitize_filename(str(year)) if year else "unknown"
             original_name = sanitize_filename(original_name) if original_name else "unknown"
@@ -73,14 +73,14 @@ class FileRenamer:
                 timestamp=timestamp
             )
             
-            if not formatted.lower().endswith(''.pdf''):
-                formatted += ''.pdf''
+            if not formatted.lower().endswith('.pdf'):
+                formatted += '.pdf'
             
             logger.debug(f"Formatted filename: {formatted}")
             return formatted
         except KeyError as e:
             logger.error(f"Invalid template key: {e}")
-            return f"document_{datetime.now().strftime(''%Y%m%d_%H%M%S'')}.pdf"
+            return f"document_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
         except Exception as e:
             logger.error(f"Error formatting filename: {e}")
-            return f"document_{datetime.now().strftime(''%Y%m%d_%H%M%S'')}.pdf"
+            return f"document_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"

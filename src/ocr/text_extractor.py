@@ -4,7 +4,7 @@ Text extraction using Tesseract OCR.
 
 import pytesseract
 import os
-from ..utils.logger import setup_logger
+from utils.logger import setup_logger
 
 
 logger = setup_logger(__name__)
@@ -49,7 +49,7 @@ class TextExtractor:
         return extracted_texts
     
     def clean_text(self, text):
-        lines = [line.strip() for line in text.split(''\n'')]
+        lines = [line.strip() for line in text.split('\n')]
         lines = [line for line in lines if line]
-        cleaned = '' ''.join(lines)
+        cleaned = ' '.join(lines)
         return cleaned
